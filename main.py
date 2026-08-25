@@ -9,10 +9,15 @@ class Manga(bm):
     status: str
     chapters_read: int
 
-class addManga(bm):
+class AddManga(bm):
     title: str
     status: str
     chapters_read: int
+
+class UpdateManga(bm):
+    title: str | None = None
+    status: str | None = None
+    chapters_read: int | None = None
 
 manga_db: list[Manga] = [
     Manga(id=1, title="One Piece", status="reading", chapters_read=1191),
@@ -31,7 +36,7 @@ def list_manga() -> list[Manga]:
     return manga_db
 
 @app.post("/api/manga", status_code=201)
-def add_manga(payload: addManga) -> Manga:
+def add_manga(payload: AddManga) -> Manga:
     new_id = max((m.id for m in manga_db), default=0) + 1
     manga = Manga(id=new_id, **payload.model_dump())
     manga_db.append(manga)
@@ -41,7 +46,15 @@ def add_manga(payload: addManga) -> Manga:
 def get_manga(manga_id: int) -> Manga:
     return find_manga(manga_id)
 
-@app.post("/api/manga/{manga_id}", status_code=204)
+@app.patch("/api/manga/{manga_id}")
+def update_manga(manga_id: int, payload: UpdateManga) -> Manga:
+    manga = find_manga(manga_id)
+    updates = payload.model_dump(exclude_unset=True)
+    for field, value in updates.items():
+        setattr(manga, field, value)
+    return manga
+
+@app.delete("/api/manga/{manga_id}", status_code=204)
 def delete_manga(manga_id: int) -> None:
     manga = find_manga(manga_id)
     manga_db.remove(manga)
