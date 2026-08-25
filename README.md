@@ -5,4 +5,4 @@ A reading tracker for manga and similar literature.
 v0.2
 Mainly uses FastAPI, Orval and Angular.
 
-Development primarily in Python currently.
+Development primarily in Python and TypeScript currently.
