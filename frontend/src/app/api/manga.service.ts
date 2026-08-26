@@ -81,10 +81,10 @@ export class MangaTrackerAPIService {
 /**
  * @summary List Manga
  */
- listMangaApiMangaGet<TData = Manga[]>( options?: HttpClientBodyOptions): Observable<TData>;
- listMangaApiMangaGet<TData = Manga[]>( options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
- listMangaApiMangaGet<TData = Manga[]>( options?: HttpClientResponseOptions): Observable<AngularHttpResponse<TData>>;
-  listMangaApiMangaGet<TData = Manga[]>(
+ listManga<TData = Manga[]>( options?: HttpClientBodyOptions): Observable<TData>;
+ listManga<TData = Manga[]>( options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
+ listManga<TData = Manga[]>( options?: HttpClientResponseOptions): Observable<AngularHttpResponse<TData>>;
+  listManga<TData = Manga[]>(
      options?: HttpClientObserveOptions): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
     if (options?.observe === 'events') {
       return this.http.get<TData>(
@@ -115,15 +115,15 @@ export class MangaTrackerAPIService {
 /**
  * @summary Add Manga
  */
- addMangaApiMangaPost<TData = Manga>(addManga: AddManga, options?: HttpClientBodyOptions): Observable<TData>;
- addMangaApiMangaPost<TData = Manga>(addManga: AddManga, options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
- addMangaApiMangaPost<TData = Manga>(addManga: AddManga, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<TData>>;
-  addMangaApiMangaPost<TData = Manga>(
-    addManga: AddManga, options?: HttpClientObserveOptions): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
+ addManga<TData = Manga>(addMangaBody: AddManga, options?: HttpClientBodyOptions): Observable<TData>;
+ addManga<TData = Manga>(addMangaBody: AddManga, options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
+ addManga<TData = Manga>(addMangaBody: AddManga, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<TData>>;
+  addManga<TData = Manga>(
+    addMangaBody: AddManga, options?: HttpClientObserveOptions): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
     if (options?.observe === 'events') {
       return this.http.post<TData>(
       `/api/manga`,
-      addManga,{
+      addMangaBody,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'events',
       }
@@ -133,7 +133,7 @@ export class MangaTrackerAPIService {
     if (options?.observe === 'response') {
       return this.http.post<TData>(
       `/api/manga`,
-      addManga,{
+      addMangaBody,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'response',
       }
@@ -142,7 +142,7 @@ export class MangaTrackerAPIService {
 
     return this.http.post<TData>(
       `/api/manga`,
-      addManga,{
+      addMangaBody,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'body',
       }
@@ -152,10 +152,10 @@ export class MangaTrackerAPIService {
 /**
  * @summary Get Manga
  */
- getMangaApiMangaMangaIdGet<TData = Manga>(mangaId: number, options?: HttpClientBodyOptions): Observable<TData>;
- getMangaApiMangaMangaIdGet<TData = Manga>(mangaId: number, options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
- getMangaApiMangaMangaIdGet<TData = Manga>(mangaId: number, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<TData>>;
-  getMangaApiMangaMangaIdGet<TData = Manga>(
+ getManga<TData = Manga>(mangaId: number, options?: HttpClientBodyOptions): Observable<TData>;
+ getManga<TData = Manga>(mangaId: number, options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
+ getManga<TData = Manga>(mangaId: number, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<TData>>;
+  getManga<TData = Manga>(
     mangaId: number, options?: HttpClientObserveOptions): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
     if (options?.observe === 'events') {
       return this.http.get<TData>(
@@ -186,19 +186,19 @@ export class MangaTrackerAPIService {
 /**
  * @summary Update Manga
  */
- updateMangaApiMangaMangaIdPatch<TData = Manga>(mangaId: number,
-    updateManga: UpdateManga, options?: HttpClientBodyOptions): Observable<TData>;
- updateMangaApiMangaMangaIdPatch<TData = Manga>(mangaId: number,
-    updateManga: UpdateManga, options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
- updateMangaApiMangaMangaIdPatch<TData = Manga>(mangaId: number,
-    updateManga: UpdateManga, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<TData>>;
-  updateMangaApiMangaMangaIdPatch<TData = Manga>(
+ updateManga<TData = Manga>(mangaId: number,
+    updateMangaBody: UpdateManga, options?: HttpClientBodyOptions): Observable<TData>;
+ updateManga<TData = Manga>(mangaId: number,
+    updateMangaBody: UpdateManga, options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
+ updateManga<TData = Manga>(mangaId: number,
+    updateMangaBody: UpdateManga, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<TData>>;
+  updateManga<TData = Manga>(
     mangaId: number,
-    updateManga: UpdateManga, options?: HttpClientObserveOptions): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
+    updateMangaBody: UpdateManga, options?: HttpClientObserveOptions): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
     if (options?.observe === 'events') {
       return this.http.patch<TData>(
       `/api/manga/${mangaId}`,
-      updateManga,{
+      updateMangaBody,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'events',
       }
@@ -208,7 +208,7 @@ export class MangaTrackerAPIService {
     if (options?.observe === 'response') {
       return this.http.patch<TData>(
       `/api/manga/${mangaId}`,
-      updateManga,{
+      updateMangaBody,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'response',
       }
@@ -217,7 +217,7 @@ export class MangaTrackerAPIService {
 
     return this.http.patch<TData>(
       `/api/manga/${mangaId}`,
-      updateManga,{
+      updateMangaBody,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'body',
       }
@@ -227,10 +227,10 @@ export class MangaTrackerAPIService {
 /**
  * @summary Delete Manga
  */
- deleteMangaApiMangaMangaIdDelete<TData = void>(mangaId: number, options?: HttpClientBodyOptions): Observable<TData>;
- deleteMangaApiMangaMangaIdDelete<TData = void>(mangaId: number, options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
- deleteMangaApiMangaMangaIdDelete<TData = void>(mangaId: number, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<TData>>;
-  deleteMangaApiMangaMangaIdDelete<TData = void>(
+ deleteManga<TData = void>(mangaId: number, options?: HttpClientBodyOptions): Observable<TData>;
+ deleteManga<TData = void>(mangaId: number, options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
+ deleteManga<TData = void>(mangaId: number, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<TData>>;
+  deleteManga<TData = void>(
     mangaId: number, options?: HttpClientObserveOptions): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
     if (options?.observe === 'events') {
       return this.http.delete<TData>(
