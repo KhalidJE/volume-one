@@ -9,6 +9,6 @@ export default defineConfig({
             target: "./src/app/api/manga.ts",
             schemas: "./src/app/api/model",
             clean: true,
-        },
-    },
+        }
+    }
 });
